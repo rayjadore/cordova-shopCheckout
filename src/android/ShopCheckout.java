@@ -21,6 +21,7 @@ public class ShopCheckout extends CordovaPlugin {
     @Override protected void pluginInitialize() {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override public void run() {
+                Log.i("start up initialization");
                 setUpCheckout();
             }
         });
