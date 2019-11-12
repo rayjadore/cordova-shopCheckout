@@ -23,7 +23,7 @@ public class ShopCheckout extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override public void run() {
                 Log.i("start up initialization", "------------------>");
-                setUpCheckout();
+              //  setUpCheckout();
             }
         });
     }
@@ -33,7 +33,7 @@ public class ShopCheckout extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override public void run() {
                 //We also initialize agentCheckout here just in case it has died. 
-                setUpCheckout();
+              //  setUpCheckout();
             }
         });
     }
