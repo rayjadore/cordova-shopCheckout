@@ -19,21 +19,23 @@ import co.tradedepot.shop.sdk.checkout.Registration;
 public class ShopCheckout extends CordovaPlugin {
 
     @Override protected void pluginInitialize() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                Log.i("start up initialization", "------------------>");
-                setUpCheckout();
-            }
-        });
+        Log.i("start up initialization", "------------------>");
+        // cordova.getActivity().runOnUiThread(new Runnable() {
+        //     @Override public void run() {
+        //         Log.i("start up initialization", "------------------>");
+        //         setUpCheckout();
+        //     }
+        // });
     }
 
     @Override public void onStart() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                //We also initialize agentCheckout here just in case it has died. 
-                setUpCheckout();
-            }
-        });
+        Log.i("onstart initialization", "------------------>");
+        // cordova.getActivity().runOnUiThread(new Runnable() {
+        //     @Override public void run() {
+        //         //We also initialize agentCheckout here just in case it has died. 
+        //         setUpCheckout();
+        //     }
+        // });
     }
 
 
