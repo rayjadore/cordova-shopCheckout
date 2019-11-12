@@ -20,22 +20,22 @@ public class ShopCheckout extends CordovaPlugin {
 
     @Override protected void pluginInitialize() {
         Log.i("start up initialization", "------------------>");
-        // cordova.getActivity().runOnUiThread(new Runnable() {
-        //     @Override public void run() {
-        //         Log.i("start up initialization", "------------------>");
-        //         setUpCheckout();
-        //     }
-        // });
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override public void run() {
+                Log.i("start up initialization", "------------------>");
+                setUpCheckout();
+            }
+        });
     }
 
     @Override public void onStart() {
         Log.i("onstart initialization", "------------------>");
-        // cordova.getActivity().runOnUiThread(new Runnable() {
-        //     @Override public void run() {
-        //         //We also initialize agentCheckout here just in case it has died. 
-        //         setUpCheckout();
-        //     }
-        // });
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override public void run() {
+                //We also initialize agentCheckout here just in case it has died. 
+                setUpCheckout();
+            }
+        });
     }
 
 
