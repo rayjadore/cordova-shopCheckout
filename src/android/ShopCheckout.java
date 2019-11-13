@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
@@ -18,14 +19,19 @@ import co.tradedepot.shop.sdk.checkout.Registration;
  */
 public class ShopCheckout extends CordovaPlugin {
 
-    @Override protected void pluginInitialize() {
+    // @Override protected void pluginInitialize() {
+    //     Log.i("start up initialization", "------------------>");
+    //     cordova.getActivity().runOnUiThread(new Runnable() {
+    //         @Override public void run() {
+    //             Log.i("start up initialization", "------------------>");
+    //           //  setUpCheckout();
+    //         }
+    //     });
+    // }
+
+    public void initialize(CordovaInterface cordova, CordovaWebView webview) {
+        super.initialize(cordova, webview);
         Log.i("start up initialization", "------------------>");
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                Log.i("start up initialization", "------------------>");
-              //  setUpCheckout();
-            }
-        });
     }
 
     @Override public void onStart() {
