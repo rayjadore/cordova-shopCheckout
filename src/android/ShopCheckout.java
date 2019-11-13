@@ -19,14 +19,14 @@ import co.tradedepot.shop.sdk.checkout.Registration;
  */
 public class ShopCheckout extends CordovaPlugin {
 
-    // @Override protected void pluginInitialize() {
-    //     cordova.getActivity().runOnUiThread(new Runnable() {
-    //         @Override public void run() {
-    //             Log.i("start up initialization", "------------------>");
-    //           //  setUpCheckout();
-    //         }
-    //     });
-    // }
+    @Override protected void pluginInitialize() {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override public void run() {
+                Log.i("start plug-initialization", "------------------>");
+              //  setUpCheckout();
+            }
+        });
+    }
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -47,10 +47,14 @@ public class ShopCheckout extends CordovaPlugin {
         });
     }
 
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        CordovaArgs cordovaArgs = new CordovaArgs(args);
+        return execute(action, cordovaArgs, callbackContext);
+    }
 
-    // @Override public void onNewIntent(Intent intent) {
-    //     cordova.getActivity().setIntent(intent);
-    // }
+    @Override public void onNewIntent(Intent intent) {
+        cordova.getActivity().setIntent(intent);
+    }
 
     private void setUpCheckout() {
         try {
