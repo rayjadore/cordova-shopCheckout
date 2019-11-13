@@ -17,7 +17,7 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
-        <source-file src="src/android/ShopCheckout.java" target-dir="src/cordova/plugin/shop-checkout/ShopCheckout" />
+        <source-file src="src/android/ShopCheckout.java" target-dir="src/cordova/plugin/shop/checkout" />
         <framework custom="true" src="src/android/build.gradle" type="gradleReference" />
     </platform>
 </plugin>
