@@ -20,7 +20,6 @@ import co.tradedepot.shop.sdk.checkout.Registration;
 public class ShopCheckout extends CordovaPlugin {
 
     // @Override protected void pluginInitialize() {
-    //     Log.i("start up initialization", "------------------>");
     //     cordova.getActivity().runOnUiThread(new Runnable() {
     //         @Override public void run() {
     //             Log.i("start up initialization", "------------------>");
@@ -29,20 +28,23 @@ public class ShopCheckout extends CordovaPlugin {
     //     });
     // }
 
-    public void initialize(CordovaInterface cordova, CordovaWebView webview) {
-        super.initialize(cordova, webview);
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        // your init code here
         Log.i("start up initialization", "------------------>");
     }
+    
 
-    @Override public void onStart() {
-        Log.i("onstart initialization", "------------------>");
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                //We also initialize agentCheckout here just in case it has died. 
-              //  setUpCheckout();
-            }
-        });
-    }
+    // @Override public void onStart() {
+    //     Log.i("onstart initialization", "------------------>");
+    //     cordova.getActivity().runOnUiThread(new Runnable() {
+    //         @Override public void run() {
+    //             //We also initialize agentCheckout here just in case it has died. 
+    //           //  setUpCheckout();
+    //         }
+    //     });
+    // }
 
 
     @Override public void onNewIntent(Intent intent) {
