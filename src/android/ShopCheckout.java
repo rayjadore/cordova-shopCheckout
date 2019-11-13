@@ -69,6 +69,7 @@ public class ShopCheckout extends CordovaPlugin {
             //Get app credentials from config.xml or the app bundle if they can't be found
             String apiKey = preferences.getString("shop-checkout-android-api-key", "");
             String sandbox = preferences.getString("shop-checkout-android-sandbox", "true");
+            Log.i("apiKey before ---", apiKey);
             boolean isSandbox = Boolean.parseBoolean(sandbox);
             Checkout.initialize(cordova.getActivity().getApplication(), apiKey, isSandbox);
             Log.i("apiKey", apiKey);
