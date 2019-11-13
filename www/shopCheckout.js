@@ -15,6 +15,10 @@ var shopCheckout = {
 
     logout: function(success, error) {
         exec(success, error, 'ShopCheckout', 'logout', []);
+    },
+
+    isInitialized: function(success, error) {
+        exec(success, error, 'ShopCheckout', 'isInitialized', []);
     }
 
 }

@@ -47,6 +47,8 @@ public class ShopCheckout extends CordovaPlugin {
             this.openTransactions(args,callbackContext); 
         } else if (action.equals("logout")) {
             this.logout(callbackContext);
+        } else if (action.equals("isInitialized")) {
+            this.isInitialized(args, callbackContext);
         }
         return true;
     }
@@ -132,15 +134,17 @@ public class ShopCheckout extends CordovaPlugin {
         }
     }
   
+    
     public void isInitialized (JSONArray args, CallbackContext callbackContext) {
-            try {
-                Checkout chkObject = new Checkout();
-                boolean initialized = chkObject.isInitialized();
-                callbackContext.success(Boolean.toString(initialized));
-            } catch (Exception e) {
-                callbackContext.error("shop-checkout not initialized");
-            }
-    }
+        try {
+            Checkout chkObject = new Checkout();
+            boolean initialized = chkObject.isInitialized();
+            Log.i("init",Boolean.toString(initialized));
+            callbackContext.success(Boolean.toString(initialized));
+        } catch (Exception e) {
+            callbackContext.error("shop-checkout not initialized");
+        }
+}
     
 
 }
