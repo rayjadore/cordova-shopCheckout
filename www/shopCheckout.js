@@ -5,10 +5,6 @@ var shopCheckout = {
         exec(success, error, 'ShopCheckout', 'registerAgent', [options]);
     },
 
-    openCart: function(options, success, error) {
-        exec(success, error, 'ShopCheckout', 'openCart', []);
-    },
-
     openProducts: function(options, success, error) {
         exec(success, error, 'ShopCheckout', 'openProducts', [options]);
     },
