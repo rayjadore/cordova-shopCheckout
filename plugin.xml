@@ -7,12 +7,12 @@
     <repo>https://github.com/tradedepot/cordova-shop-checkout.git</repo>
    <keywords>Shop,checkout,cordova</keywords>
     <js-module name="ShopCheckout" src="www/shopCheckout.js">
-        <clobbers target="cordova.plugins.ShopCheckout" />
+        <clobbers target="cordova.plugins" />
     </js-module>
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="ShopCheckout">
-                <param name="android-package" value="cordova/plugin/shop-checkout.ShopCheckout" />
+                <param name="android-package" value="cordova.plugin.shop.checkout.ShopCheckout" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
