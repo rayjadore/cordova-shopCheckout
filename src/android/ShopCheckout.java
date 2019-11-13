@@ -47,9 +47,9 @@ public class ShopCheckout extends CordovaPlugin {
     // }
 
 
-    @Override public void onNewIntent(Intent intent) {
-        cordova.getActivity().setIntent(intent);
-    }
+    // @Override public void onNewIntent(Intent intent) {
+    //     cordova.getActivity().setIntent(intent);
+    // }
 
     private void setUpCheckout() {
         try {
@@ -64,78 +64,78 @@ public class ShopCheckout extends CordovaPlugin {
         }
     }
 
-    private enum Action {
-        registerAgent {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try {
-                    Log.i("register agent", "clicked");
-                    JSONObject options = args.optJSONObject(0);
-                    if((options.optString("agentId") != null && options.optString("agentId").length() > 0) && (options.optString("firstName") != null && options.optString("firstName").length() > 0) &&
-                            (options.optString("lastName") != null && options.optString("lastName").length() > 0) && (options.optString("phoneNumber") != null && options.optString("phoneNumber").length() > 0 )
-                            && (options.optString("countryCode") != null && options.optString("countryCode").length() > 0)  && (options.optString("company") != null && options.optString("company").length() > 0) &&
-                            (options.optString("address") != null && options.optString("address").length() > 0)) {
-                        Registration registration = Registration.Builder.create()
-                            .agentId(options.optString("agentId"))
-                            .firstName(options.optString("firstName"))
-                            .lastName(options.optString("lastName"))
-                            .phoneNumber(options.optString("phoneNumber"))
-                            .countryCode(options.optString("countryCode"))
-                            .company(options.optString("company"))
-                            .latitude(options.optDouble("latitude"))
-                            .longitude(options.optDouble("longitude"))
-                            .address(options.optString("address")).build();
-                        Checkout.registerAgent(registration);
-                        callbackContext.success();
-                    } else {
-                        callbackContext.error("registerAgent is called with incomplete details");
-                        Log.e("registerAgent is called with incomplete details", "reg failed");
-                    }
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                    Log.e("shop-checkout not initialized", "app initialization");
-                }
-            }
-        },
-        openProducts {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
-                    Checkout.openProducts();
-                    callbackContext.success();
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                }
-            }
-        },
-        openTransactions {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
-                    Checkout.openTransactions();
-                    callbackContext.success();
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                }
-            }
-        },
-        logout {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
-                    Checkout.logout();
-                    callbackContext.success();
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                }
-            }
-        },
-        isInitialized {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
-                    Checkout chkObject = new Checkout();
-                    boolean initialized = chkObject.isInitialized();
-                    callbackContext.success(Boolean.toString(initialized));
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                }
-            }
-        }
-    }
+    // private enum Action {
+    //     registerAgent {
+    //         void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+    //             try {
+    //                 Log.i("register agent", "clicked");
+    //                 JSONObject options = args.optJSONObject(0);
+    //                 if((options.optString("agentId") != null && options.optString("agentId").length() > 0) && (options.optString("firstName") != null && options.optString("firstName").length() > 0) &&
+    //                         (options.optString("lastName") != null && options.optString("lastName").length() > 0) && (options.optString("phoneNumber") != null && options.optString("phoneNumber").length() > 0 )
+    //                         && (options.optString("countryCode") != null && options.optString("countryCode").length() > 0)  && (options.optString("company") != null && options.optString("company").length() > 0) &&
+    //                         (options.optString("address") != null && options.optString("address").length() > 0)) {
+    //                     Registration registration = Registration.Builder.create()
+    //                         .agentId(options.optString("agentId"))
+    //                         .firstName(options.optString("firstName"))
+    //                         .lastName(options.optString("lastName"))
+    //                         .phoneNumber(options.optString("phoneNumber"))
+    //                         .countryCode(options.optString("countryCode"))
+    //                         .company(options.optString("company"))
+    //                         .latitude(options.optDouble("latitude"))
+    //                         .longitude(options.optDouble("longitude"))
+    //                         .address(options.optString("address")).build();
+    //                     Checkout.registerAgent(registration);
+    //                     callbackContext.success();
+    //                 } else {
+    //                     callbackContext.error("registerAgent is called with incomplete details");
+    //                     Log.e("registerAgent is called with incomplete details", "reg failed");
+    //                 }
+    //             } catch (Exception e) {
+    //                 callbackContext.error("shop-checkout not initialized");
+    //                 Log.e("shop-checkout not initialized", "app initialization");
+    //             }
+    //         }
+    //     },
+    //     openProducts {
+    //         void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+    //             try{
+    //                 Checkout.openProducts();
+    //                 callbackContext.success();
+    //             } catch (Exception e) {
+    //                 callbackContext.error("shop-checkout not initialized");
+    //             }
+    //         }
+    //     },
+    //     openTransactions {
+    //         void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+    //             try{
+    //                 Checkout.openTransactions();
+    //                 callbackContext.success();
+    //             } catch (Exception e) {
+    //                 callbackContext.error("shop-checkout not initialized");
+    //             }
+    //         }
+    //     },
+    //     logout {
+    //         void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+    //             try{
+    //                 Checkout.logout();
+    //                 callbackContext.success();
+    //             } catch (Exception e) {
+    //                 callbackContext.error("shop-checkout not initialized");
+    //             }
+    //         }
+    //     },
+    //     isInitialized {
+    //         void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+    //             try{
+    //                 Checkout chkObject = new Checkout();
+    //                 boolean initialized = chkObject.isInitialized();
+    //                 callbackContext.success(Boolean.toString(initialized));
+    //             } catch (Exception e) {
+    //                 callbackContext.error("shop-checkout not initialized");
+    //             }
+    //         }
+    //     }
+    // }
 }
