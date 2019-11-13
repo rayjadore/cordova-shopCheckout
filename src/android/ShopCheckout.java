@@ -56,6 +56,8 @@ public class ShopCheckout extends CordovaPlugin {
             this.openTransactions(args,callbackContext); 
         } else if (action.equals("logout")) {
             this.logout(callbackContext);
+        } else if (action.equals("openCart")) {
+            this.openCart(callbackContext);
         }
         return true;
     }
@@ -71,7 +73,7 @@ public class ShopCheckout extends CordovaPlugin {
             String sandbox = preferences.getString("shop-checkout-android-sandbox", "true");
             Log.i("apiKey before ---", apiKey);
             boolean isSandbox = Boolean.parseBoolean(sandbox);
-            Checkout.initialize(cordova.getActivity().getApplication(), apiKey, isSandbox);
+            Checkout.initialize(cordova.getActivity(), apiKey, isSandbox);
             Log.i("apiKey", apiKey);
             Log.i("shop checkout", "initialized");
         } catch (Exception e) {
@@ -110,15 +112,20 @@ public class ShopCheckout extends CordovaPlugin {
             }
     }
     
-    private void openProducts (JSONArray args, CallbackContext callbackContext) {
-            try{
-                Log.i("open products", "before");
-                Checkout.openProducts();
-                Log.i("open products", "after");
-                callbackContext.success();
-            } catch (Exception e) {
-                callbackContext.error("shop-checkout not initialized");
+    private void openProducts (CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override public void run() {
+                try{
+                    Log.i("open products", "before");
+                    Checkout.openProducts();
+                    Log.i("open products", "after");
+                    callbackContext.success();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    callbackContext.error("shop-checkout not initialized" + e);
+                }
             }
+        });
     }
     
     private void openTransactions (JSONArray args, CallbackContext callbackContext) {
@@ -127,6 +134,15 @@ public class ShopCheckout extends CordovaPlugin {
                 callbackContext.success();
         } catch (Exception e) {
                 callbackContext.error("shop-checkout not initialized");
+        }
+    }
+
+    private void openCart (CallbackContext callbackContext) {
+        try {
+            Log.i("open products", "before");
+            Checkout.openCart()
+        } catch (Exception e) {
+            callbackContext.error("shop-checkout not initialized");
         }
     }
    

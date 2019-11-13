@@ -10,7 +10,6 @@ var shopCheckout = {
     },
 
     openProducts: function(options, success, error) {
-        console.log('openProducts from js file');
         exec(success, error, 'ShopCheckout', 'openProducts', [options]);
     },
 
