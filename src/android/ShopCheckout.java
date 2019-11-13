@@ -48,7 +48,7 @@ public class ShopCheckout extends CordovaPlugin {
     }
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.i('action-------------------->', action);
+        Log.i("action-------------------->", action);
     }
 
     @Override public void onNewIntent(Intent intent) {
