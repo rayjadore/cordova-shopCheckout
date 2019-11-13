@@ -49,13 +49,13 @@ public class ShopCheckout extends CordovaPlugin {
 
         public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
             if(action.equals("registerAgent")) {
-            this.registerAgent(args,callbackContext)
+                this.registerAgent(args,callbackContext);
             } else if (action.equals("openProducts")) {
-                
+                this.openProducts(args,callbackContext); 
             } else if (action.equals("openTransactions")) {
-                
+                this.openTransactions(args,callbackContext); 
             } else if (action.equals("logout")) {
-                
+                this.logout(callbackContext);
             }
             return true;
         }
@@ -126,7 +126,7 @@ public class ShopCheckout extends CordovaPlugin {
             }
         }
        
-        private void logout (JSONArray args, CallbackContext callbackContext) {
+        private void logout (CallbackContext callbackContext) {
             try{
                 Checkout.logout();
                 callbackContext.success();
