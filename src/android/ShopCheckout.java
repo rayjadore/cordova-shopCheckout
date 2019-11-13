@@ -128,7 +128,9 @@ public class ShopCheckout extends CordovaPlugin {
     
     private void openTransactions (JSONArray args, CallbackContext callbackContext) {
         try{
+                Log.i("openTransaction", "beofre");
                 Checkout.openTransactions();
+                Log.i("openTransaction", "after");
                 callbackContext.success();
         } catch (Exception e) {
                 callbackContext.error("shop-checkout not initialized");
