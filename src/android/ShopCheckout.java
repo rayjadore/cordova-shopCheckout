@@ -19,59 +19,66 @@ import co.tradedepot.shop.sdk.checkout.Registration;
  */
 public class ShopCheckout extends CordovaPlugin {
 
-    @Override protected void pluginInitialize() {
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                Log.i("start plug-initialization", "------------------>");
-              //  setUpCheckout();
-            }
-        });
-    }
+        @Override protected void pluginInitialize() {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    Log.i("start plug-initialization", "------------------>");
+                //  setUpCheckout();
+                }
+            });
+        }
 
-    @Override
-    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        super.initialize(cordova, webView);
-        // your init code here
-        Log.i("start up initialization", "------------------>");
-        setUpCheckout();
-    }
+        @Override
+        public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+            super.initialize(cordova, webView);
+            // your init code here
+            Log.i("start up initialization", "------------------>");
+            setUpCheckout();
+        }
     
 
-    @Override public void onStart() {
-        Log.i("onstart initialization", "------------------>");
-        cordova.getActivity().runOnUiThread(new Runnable() {
-            @Override public void run() {
-                //We also initialize agentCheckout here just in case it has died. 
-                setUpCheckout();
-            }
-        });
-    }
-
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Log.i("action-------------------->", action);
-        return false;
-    }
-
-    @Override public void onNewIntent(Intent intent) {
-        cordova.getActivity().setIntent(intent);
-    }
-
-    private void setUpCheckout() {
-        try {
-            //Get app credentials from config.xml or the app bundle if they can't be found
-            String apiKey = preferences.getString("shop-checkout-android-api-key", "");
-            String sandbox = preferences.getString("shop-checkout-android-sandbox", "true");
-            boolean isSandbox = Boolean.parseBoolean(sandbox);
-            Checkout.initialize(cordova.getActivity().getApplication(), apiKey, isSandbox);
-            Log.i("shop checkout", "initialized");
-        } catch (Exception e) {
-            Log.e("ShopCheckout-Cordova", "ERROR: Something went wrong when initializing shopCheckout. Have you set your SHOP-CHECKOUT_ANDROID_API_KEY?", e);
+        @Override public void onStart() {
+            Log.i("onstart initialization", "------------------>");
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    //We also initialize agentCheckout here just in case it has died. 
+                    setUpCheckout();
+                }
+            });
         }
-    }
 
-    private enum Action {
-        registerAgent {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+        public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+            if(action.equals("registerAgent")) {
+            this.registerAgent(args,callbackContext)
+            } else if (action.equals("openProducts")) {
+                
+            } else if (action.equals("openTransactions")) {
+                
+            } else if (action.equals("logout")) {
+                
+            }
+            return true;
+        }
+
+        // @Override public void onNewIntent(Intent intent) {
+        //     cordova.getActivity().setIntent(intent);
+        // }
+
+        private void setUpCheckout() {
+            try {
+                //Get app credentials from config.xml or the app bundle if they can't be found
+                String apiKey = preferences.getString("shop-checkout-android-api-key", "");
+                String sandbox = preferences.getString("shop-checkout-android-sandbox", "true");
+                boolean isSandbox = Boolean.parseBoolean(sandbox);
+                Checkout.initialize(cordova.getActivity().getApplication(), apiKey, isSandbox);
+                Log.i("shop checkout", "initialized");
+            } catch (Exception e) {
+                Log.e("ShopCheckout-Cordova", "ERROR: Something went wrong when initializing shopCheckout. Have you set your SHOP-CHECKOUT_ANDROID_API_KEY?", e);
+            }
+        }
+
+    
+        private void registerAgent (JSONArray args, CallbackContext callbackContext) {
                 try {
                     Log.i("register agent", "clicked");
                     JSONObject options = args.optJSONObject(0);
@@ -99,48 +106,44 @@ public class ShopCheckout extends CordovaPlugin {
                     callbackContext.error("shop-checkout not initialized");
                     Log.e("shop-checkout not initialized", "app initialization");
                 }
-            }
-        },
-        openProducts {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+        }
+        
+        private void openProducts (JSONArray args, CallbackContext callbackContext) {
                 try{
                     Checkout.openProducts();
                     callbackContext.success();
                 } catch (Exception e) {
                     callbackContext.error("shop-checkout not initialized");
                 }
-            }
-        },
-        openTransactions {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
+        }
+        
+        private void openTransactions (JSONArray args, CallbackContext callbackContext) {
+            try{
                     Checkout.openTransactions();
                     callbackContext.success();
-                } catch (Exception e) {
+            } catch (Exception e) {
                     callbackContext.error("shop-checkout not initialized");
-                }
             }
-        },
-        logout {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
-                    Checkout.logout();
-                    callbackContext.success();
-                } catch (Exception e) {
-                    callbackContext.error("shop-checkout not initialized");
-                }
+        }
+       
+        private void logout (JSONArray args, CallbackContext callbackContext) {
+            try{
+                Checkout.logout();
+                callbackContext.success();
+            } catch (Exception e) {
+                callbackContext.error("shop-checkout not initialized");
             }
-        },
-        isInitialized {
-            void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
-                try{
+        }
+      
+        public void isInitialized (JSONArray args, CallbackContext callbackContext) {
+                try {
                     Checkout chkObject = new Checkout();
                     boolean initialized = chkObject.isInitialized();
                     callbackContext.success(Boolean.toString(initialized));
                 } catch (Exception e) {
                     callbackContext.error("shop-checkout not initialized");
                 }
-            }
         }
-    }
+        
+    
 }
