@@ -9,6 +9,11 @@ var shopCheckout = {
         exec(success, error, 'ShopCheckout', 'openCart', []);
     },
 
+    openProducts: function(options, success, error) {
+        console.log('openProducts from js file');
+        exec(success, error, 'ShopCheckout', 'openProducts', [options]);
+    },
+
     openTransactions: function(success, error) {
         exec(success, error, 'ShopCheckout', 'openTransactions', []);
     },

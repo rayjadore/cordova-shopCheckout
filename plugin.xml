@@ -7,7 +7,6 @@
     <repo>https://github.com/tradedepot/cordova-shop-checkout.git</repo>
    <keywords>Shop,checkout,cordova</keywords>
     <js-module name="ShopCheckout" src="www/shopCheckout.js">
-        <clobbers target="cordova.plugins" />
         <clobbers target="shopCheckout" />
         <clobbers target="cordova.plugins.shopCheckout" />
         <clobbers target="plugin.shopCheckout" />

@@ -51,7 +51,7 @@ public class ShopCheckout extends CordovaPlugin {
         if(action.equals("registerAgent")) {
             this.registerAgent(args,callbackContext);
         } else if (action.equals("openProducts")) {
-            this.openProducts(args,callbackContext); 
+            this.openProducts(callbackContext); 
         } else if (action.equals("openTransactions")) {
             this.openTransactions(args,callbackContext); 
         } else if (action.equals("logout")) {
@@ -112,7 +112,9 @@ public class ShopCheckout extends CordovaPlugin {
     
     private void openProducts (JSONArray args, CallbackContext callbackContext) {
             try{
+                Log.i("open products", "before");
                 Checkout.openProducts();
+                Log.i("open products", "after");
                 callbackContext.success();
             } catch (Exception e) {
                 callbackContext.error("shop-checkout not initialized");
