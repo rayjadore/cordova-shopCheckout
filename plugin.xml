@@ -12,7 +12,7 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="ShopCheckout">
-                <param name="android-package" value="cordova.plugin.shop.checkout" />
+                <param name="android-package" value="cordova.plugin.shop-checkout.ShopCheckout" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
