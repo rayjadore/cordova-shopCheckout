@@ -28,15 +28,6 @@ public class ShopCheckout extends CordovaPlugin {
         });
     }
 
-    @Override
-    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        super.initialize(cordova, webView);
-        // your init code here
-        Log.i("start up initialization", "------------------>");
-        setUpCheckout();
-    }
-
-
     @Override public void onStart() {
         Log.i("onstart initialization", "------------------>");
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -69,10 +60,8 @@ public class ShopCheckout extends CordovaPlugin {
             //Get app credentials from config.xml or the app bundle if they can't be found
             String apiKey = preferences.getString("shop-checkout-android-api-key", "");
             String sandbox = preferences.getString("shop-checkout-android-sandbox", "true");
-            Log.i("apiKey before ---", apiKey);
             boolean isSandbox = Boolean.parseBoolean(sandbox);
             Checkout.initialize(cordova.getActivity(), apiKey, isSandbox);
-            Log.i("apiKey", apiKey);
             Log.i("shop checkout", "initialized");
         } catch (Exception e) {
             Log.e("ShopCheckout-Cordova", "ERROR: Something went wrong when initializing shopCheckout. Have you set your SHOP-CHECKOUT_ANDROID_API_KEY?", e);
@@ -82,7 +71,6 @@ public class ShopCheckout extends CordovaPlugin {
 
     private void registerAgent (JSONArray args, CallbackContext callbackContext) {
             try {
-                Log.i("register agent", "clicked");
                 JSONObject options = args.optJSONObject(0);
                 if((options.optString("agentId") != null && options.optString("agentId").length() > 0) && (options.optString("firstName") != null && options.optString("firstName").length() > 0) &&
                         (options.optString("lastName") != null && options.optString("lastName").length() > 0) && (options.optString("phoneNumber") != null && options.optString("phoneNumber").length() > 0 )
@@ -114,9 +102,7 @@ public class ShopCheckout extends CordovaPlugin {
         cordova.getActivity().runOnUiThread(new Runnable() {
                 @Override public void run() {
                 try{
-                    Log.i("open products", "before");
                     Checkout.openProducts();
-                    Log.i("open products", "after");
                     callbackContext.success();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -128,9 +114,8 @@ public class ShopCheckout extends CordovaPlugin {
     
     private void openTransactions (JSONArray args, CallbackContext callbackContext) {
         try{
-                Log.i("openTransaction", "beofre");
+               
                 Checkout.openTransactions();
-                Log.i("openTransaction", "after");
                 callbackContext.success();
         } catch (Exception e) {
                 callbackContext.error("shop-checkout not initialized");
